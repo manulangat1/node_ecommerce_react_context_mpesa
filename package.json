@@ -1,0 +1,26 @@
+{
+  "name": "amazona",
+  "version": "1.0.0",
+  "description": "Amazon clone Node and React",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manulangat1/node_ecommerce_react_context_mpesa.git"
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "React",
+    "MOngo",
+    "db"
+  ],
+  "author": "Emmanuel Kipchirchir Langat",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/manulangat1/node_ecommerce_react_context_mpesa/issues"
+  },
+  "homepage": "https://github.com/manulangat1/node_ecommerce_react_context_mpesa#readme"
+}
