@@ -4,7 +4,8 @@
   "description": "Amazon clone Node and React",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "server": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,16 @@
   "bugs": {
     "url": "https://github.com/manulangat1/node_ecommerce_react_context_mpesa/issues"
   },
-  "homepage": "https://github.com/manulangat1/node_ecommerce_react_context_mpesa#readme"
+  "homepage": "https://github.com/manulangat1/node_ecommerce_react_context_mpesa#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.28",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.4"
+  }
 }
