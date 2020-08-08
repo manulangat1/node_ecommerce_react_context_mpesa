@@ -3,12 +3,14 @@ const morgan = require('morgan')
 const colors = require('colors')
 const dotenv = require('dotenv')
 const path = require('path')
+
 // import db file
 const connectDB = require('./config/db')
 
 //import routes 
 const products = require('./routes/Product')
 const orderItem = require('./routes/orderItem')
+const order = require('./routes/Order')
 
 dotenv.config({path:'./config/config.env'})
 //load db 
@@ -25,7 +27,7 @@ if (process.env.NODE_ENV === "development"){
 //routes here
 app.use('/api/v1/products/',products)
 app.use('/api/v1/orderItems/',orderItem)
-
+app.use('/api/v1/order/',order)
 
 const PORT = process.env.PORT
 

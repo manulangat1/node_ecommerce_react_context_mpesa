@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 
-const OrderSchema = new OrderSchema({
+const OrderSchema = new  mongoose.Schema({
     orderItems:[
         {
             type: mongoose.Schema.Types.ObjectId,
