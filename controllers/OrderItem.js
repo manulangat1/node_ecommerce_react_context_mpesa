@@ -4,16 +4,23 @@ const Product = require('../models/Product')
 exports.getOrderItem = async (req,res,next) => {
     try{
         const orderItems = await OrderItem.find()
-        total = 0 
+        total = 0  
         for (i in orderItems){
-            console.log(i)
-            total = total +  orderItems.total
+            total = orderItems[i].products.price * orderItems[i].quantity
+            // console.log(orderItems[i].products)
+            const product = await Product.findById(orderItems[i].products)
+            console.log(product.price)
+            totals = parseInt(product.price * orderItems[i].quantity)
+            console.log(totals)
+            total = total + totals
         }
+        console.log(total)
+        // console.log(orderItems)
         res.status(200).json({
             success:true,
             data:orderItems,
             count:orderItems.length,
-            total:total
+            // total:total
         })
     } catch (err){
         console.log(`err:${err}`)
