@@ -8,6 +8,7 @@ const connectDB = require('./config/db')
 
 //import routes 
 const products = require('./routes/Product')
+const orderItem = require('./routes/orderItem')
 
 dotenv.config({path:'./config/config.env'})
 //load db 
@@ -22,6 +23,8 @@ if (process.env.NODE_ENV === "development"){
 }
 //routes here
 app.use('/api/v1/products/',products)
+app.use('/api/v1/orderItems/',orderItem)
+
 
 const PORT = process.env.PORT
 
