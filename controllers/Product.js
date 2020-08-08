@@ -3,7 +3,8 @@ const Product = require('../models/Product')
 
 exports.getProduct = async(req,res,next) => {
     try{
-        const products = Product.find()
+        const products = await Product.find()
+        // console.log(`products:${products}`)
         res.status(200).json({
             success:true,
             data:products

@@ -12,7 +12,6 @@ const ProductSchema = new mongoose.Schema({
     price:{
         type:Number,
         required:[true,'Pass in a value']
-    },
-
+    }
 })
-module.exports = new mongoose.model('Product',ProductSchema)
+module.exports =  mongoose.model('Product',ProductSchema)
