@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const jwt = requre('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
 const UserSchema = new mongoose.Schema({
@@ -16,7 +16,8 @@ const UserSchema = new mongoose.Schema({
     email:{
         type:String,
         required:[true,'Kindly input a messa'],
-        trim:true
+        trim:true,
+        unique:true
     },
     active:{
         type:Boolean,

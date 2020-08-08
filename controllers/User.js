@@ -19,19 +19,43 @@ exports.registerUser = async (req,res) => {
             from:process.env.EMAIL,
             to:req.body.email,
             subject:"Actiovation EMAIl",
-            text:`
+            text:`"
             <p>Hey there</p>
-            <p>To activate your account click <a href="' + link '">here</a></p>
+            <p>To activate your account click <a href="${link}">here</a></p>
+            "
             `
         }
         await user.save()
-        sendmail(mail)
+        await sendmail(mail)
         const token = user.generateAuthToken()
         res.status(201).json({
             success:true,
             token:token,
             user:user
         })
+    } catch (err){
+        console.log(`err:${err}`)
+        res.status(500).json({
+            success:false,
+            error:'Internal Server Error'
+        })  
+    }
+}
+
+exports.activateUser = async(req,res) => {
+    try{
+        const actiLink = req.params.activationString
+        const user = await User.findOne({activationString:actiLink})
+        if (user ){
+            user.active = true
+            await user.save()
+            const token = user.generateAuthToken()
+            res.status(200).json({
+            success:true,
+            token:token,
+            user:user
+            })
+        }
     } catch (err){
         console.log(`err:${err}`)
         res.status(500).json({
