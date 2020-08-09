@@ -88,14 +88,20 @@ exports.loginUser = async (req,res) => {
         }) 
     }
 }
-// exports.loadUser = async (req,res) => {
-//     try{
+exports.loadUser = async (req,res) => {
+    try{
+        console.log(req.token)
+        res.status(200).json({
+            success:true,
+            user:req.user,
+            token:req.token
 
-//     } catch (err){
-//         console.log(`err:${err}`)
-//         res.status(500).json({
-//             success:false,
-//             error:'Internal Server Error'
-//         }) 
-//     }
-// }
+        })
+    } catch (err){
+        console.log(`err:${err}`)
+        res.status(500).json({
+            success:false,
+            error:'Internal Server Error'
+        }) 
+    }
+}
