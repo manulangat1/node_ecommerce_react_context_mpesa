@@ -26,10 +26,11 @@ if (process.env.NODE_ENV === "development"){
     app.use(morgan('dev'))
 }
 //routes here
+app.use('/auth/v1/',user)
+
 app.use('/api/v1/products/',products)
 app.use('/api/v1/orderItems/',orderItem)
 app.use('/api/v1/order/',order)
-app.use('/auth/v1/',user)
 
 const PORT = process.env.PORT
 

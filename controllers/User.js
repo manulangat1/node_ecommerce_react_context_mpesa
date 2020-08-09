@@ -26,7 +26,8 @@ exports.registerUser = async (req,res) => {
         }
         await user.save()
         await sendmail(mail)
-        const token = user.generateAuthToken()
+        const token = await user.generateAuthToken()
+        console.log(token)
         res.status(201).json({
             success:true,
             token:token,
@@ -48,8 +49,11 @@ exports.activateUser = async(req,res) => {
         if (user ){
             user.active = true
             await user.save()
-            const token = user.generateAuthToken()
+            // const token = user.generateAuthToken()
+            const token =  await user.generateAuthToken()
+            console.log(token)
             res.status(200).json({
+
             success:true,
             token:token,
             user:user
@@ -63,3 +67,35 @@ exports.activateUser = async(req,res) => {
         })  
     }
 }
+exports.loginUser = async (req,res) => {
+    try{
+        const { email,password } = req.body 
+        const user = await User.findByCredentials(email,password)
+        // console.log(user)
+        if (user){
+            const token = await user.generateAuthToken()
+            res.status(200).json({
+                success:true,
+                token:token,
+                user:user
+            })
+        }
+    } catch (err){
+        console.log(`err:${err}`)
+        res.status(500).json({
+            success:false,
+            error:'Internal Server Error'
+        }) 
+    }
+}
+// exports.loadUser = async (req,res) => {
+//     try{
+
+//     } catch (err){
+//         console.log(`err:${err}`)
+//         res.status(500).json({
+//             success:false,
+//             error:'Internal Server Error'
+//         }) 
+//     }
+// }
