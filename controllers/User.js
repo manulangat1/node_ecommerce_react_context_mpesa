@@ -105,3 +105,18 @@ exports.loadUser = async (req,res) => {
         }) 
     }
 }
+
+exports.logoutUser = async (req,res) => {
+    try{
+        req.user.tokens.splice(0, req.user.tokens.length)
+        await req.user.save()
+        res.status({
+            success:true,
+            message:'Logged out successfully'
+        })
+    } catch (err) {
+        res.status(401).json({
+            error:"Unauthorised"
+        })
+    }
+}

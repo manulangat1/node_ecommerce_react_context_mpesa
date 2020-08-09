@@ -11,7 +11,7 @@ const auth = async (req,res,next) => {
             res.status(500).json({
                 error:"No user sorry"
             })
-        } else{
+        } 
         if (user.active === true){
             req.user = user 
             req.token = token 
@@ -20,7 +20,7 @@ const auth = async (req,res,next) => {
             res.status(401).json({
                 error:"Activate your account to get started"
             })
-        }
+     
     }
         
     } catch (err){
