@@ -1,13 +1,22 @@
-import React ,{useState} from 'react'
-
-
+import React ,{useState,useContext} from 'react'
+import { GlobalContext} from '../../context/GlobalState'
+import { Redirect } from 'react-router-dom'
 export const Login = () => {
+    const { loginUser,isAuthenticated} = useContext(GlobalContext)
     const [email,setEmail] = useState('')
+    console.log(isAuthenticated)
     const [password,setPassword] = useState('')
+    const onSubmit = e => {
+        e.preventDefault()
+        loginUser(email,password)
+    }
+    // if(isAuthenticated){
+    //     <Redirect to="/" />
+    // }
     return(
         <section>
             <h1>Sign In</h1>
-            <form>
+            <form onSubmit={onSubmit}>
                 <div>
                     <label>Email</label>
                     <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" required />

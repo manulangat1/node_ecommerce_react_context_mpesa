@@ -1,16 +1,21 @@
-import React , { useContext }from 'react'
+import React , { useContext ,useEffect}from 'react'
 import {  GlobalContext } from '../../context/GlobalState'
 
 
 export const ProductView = () => {
-    const { products } = useContext(GlobalContext)
+    const { products,getProducts } = useContext(GlobalContext)
     console.log(products)
+    useEffect(() => {
+        getProducts()
+    },[])
     return (
         <section>
             {
                 products.map(product => (
                     <div>
                         <h1>{product.name}</h1>
+                        <p>{product.price}</p>
+                        
                     </div>
                 ))
             }
