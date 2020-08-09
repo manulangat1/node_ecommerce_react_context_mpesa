@@ -13,13 +13,12 @@ exports.registerUser = async (req,res) => {
         const acti = jwt.sign({_id:user._id,username:user.username},process.env.JWT_KEY)
         user.activationString = acti
         //
-        const link = 'http://locolhost:3000/account/active/'
-        + acti;
+        const link = `localhost:5000/auth/v1/${acti}`;
         const mail = { 
             from:process.env.EMAIL,
             to:req.body.email,
             subject:"Actiovation EMAIl",
-            text:`"
+            html:`"
             <p>Hey there</p>
             <p>To activate your account click <a href="${link}">here</a></p>
             "
