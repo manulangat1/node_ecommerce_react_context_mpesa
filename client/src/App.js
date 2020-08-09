@@ -1,25 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/layout/Header'
+import Footer from './components/layout/Footer'
+import './styles/main.scss'
+import { Login } from './components/auth/Login'
+import { Register } from './components/auth/Register'
+import { ProductView } from './components/Products/ProductView'
+//React route 
+import { HashRouter as Router,Route,Link,Switch} from 'react-router-dom'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+      <Router>
+        <main>
+      <Header />
+        <Switch>
+          <div>
+          <Route exact path="/" component={ProductView} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register/" component={Register} />
+          </div>
+        </Switch>
+      <Footer />
+      </main>
+      </Router>
+    
   );
 }
 
