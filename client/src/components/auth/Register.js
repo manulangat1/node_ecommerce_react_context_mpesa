@@ -24,8 +24,13 @@ export const Register = () => {
     // if(isAuthenticated){
     //     <Redirect to="/" />
     // }
+    if (isAuthenticated){
+        console.log("auth")
+        return <Redirect to="/" />
+    }
     return(
         <section>
+            <div className="container">
             <h1>Sign Up</h1>
             <form onSubmit={onSubmit}>
                     <div>
@@ -46,6 +51,7 @@ export const Register = () => {
                 </div>
                 <input type="submit" value="LOg in" />
             </form>
+            </div>
         </section>
     )
 }

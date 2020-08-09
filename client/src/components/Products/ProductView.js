@@ -10,17 +10,19 @@ export const ProductView = () => {
     },[])
     return (
         <section>
+            <div className="container">
             {
                 products.map(product => (
                     <div>
                         <h1>{product.name}</h1>
                         <p>{product.price}</p>
-                        
+
                     </div>
                 ))
             }
             {!products && <div>hry</div>}
             <h1>Home</h1>
+            </div>
         </section>
     )
 }
