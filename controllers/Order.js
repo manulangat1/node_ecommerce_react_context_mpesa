@@ -5,8 +5,8 @@ const Product = require('../models/Product')
 
 exports.getOrder = async (req,res) => {
     try{
-        const orders = await Order.find()
-        console.log(orders.orderItems)
+        const orders = await Order.find({user:req.user})
+        console.log(orders)
         res.status(200).json({
             success:true,
             count:orders.length,
@@ -23,7 +23,36 @@ exports.getOrder = async (req,res) => {
 
 exports.postOrder = async(req,res) => {
     try{
-        const product = await Product.findById(req.body.products)
+        const user = req.user
+        const orderExist = await Order.findOne({user:user,isPaid:false})
+        // console.log(orderExist)
+        if (!orderExist){
+            console.log(" Not Found")
+            const product = await Product.findById(req.body.products)
+
+            const OrderItems = new OrderItem({
+                products:product
+            })
+            
+            const newOrderItem = await OrderItems.save()
+            total = await  newOrderItem.generateOrderItemTotal()
+            console.log(total)
+            orderExists = new Order({
+                user:req.user
+            })
+            orderExists.orderItems = newOrderItem
+            // const 
+            const creates = await orderExists.save()
+            console.log(creates)
+            res.status(201).json({
+                success:true,
+                total:total,
+                count:creates.length,
+                data:creates
+            })
+        } else {
+            console.log("Found")
+            const product = await Product.findById(req.body.products)
         const orderItems = await OrderItem.findOne({products:product})
 
         if (orderItems){
@@ -33,10 +62,8 @@ exports.postOrder = async(req,res) => {
             
             total = await  orderItems.generateOrderItemTotal()
             console.log(total)
-            const ordeR = new Order({
-                orderItems:orderItems
-            })
-            const create = await ordeR.save()
+            orderExist.orderItems = orderItems
+            const create = await orderExist.save()
             // console.log(create)
             res.status(201).json({
                 success:true,
@@ -47,19 +74,24 @@ exports.postOrder = async(req,res) => {
             const OrderItems = new OrderItem({
                 products:product
             })
-            total = await  orderItems.generateOrderItemTotal()
-            console.log(total)
+            
             const newOrderItem = await OrderItems.save()
-            // console.log(newOrderItem.products.price)
-            const ordeRs = new Order({
-                orderItems:orderItems
-            })
-            const creates = await ordeRs.save()
-            // console.log(create)
+            total = await  newOrderItem.generateOrderItemTotal()
+            console.log(total)
+            console.log(orderExist)
+            const id = newOrderItem._id
+            console.log(id)
+            // const od = OrderItem.find
+            orderExist.orderItems = orderExist.orderItems.concat(`${id}`)
+            // const 
+            const creates = await orderExist.save()
+            // console.log(creates)
             res.status(201).json({
                 success:true,
+                total:total,
                 data:creates
             })
+        }
         }
     } catch(err){
         console.log(`err:${err}`)
