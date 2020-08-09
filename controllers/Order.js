@@ -6,7 +6,7 @@ const Product = require('../models/Product')
 exports.getOrder = async (req,res) => {
     try{
         const orders = await Order.find({user:req.user})
-        console.log(orders.orderItems)
+        console.log(orders)
         res.status(200).json({
             success:true,
             count:orders.length,
