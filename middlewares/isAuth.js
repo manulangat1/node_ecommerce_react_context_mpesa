@@ -11,10 +11,18 @@ const auth = async (req,res,next) => {
             res.status(500).json({
                 error:"No user sorry"
             })
+        } else{
+        if (user.active === true){
+            req.user = user 
+            req.token = token 
+            next()
+        } else{
+            res.status(401).json({
+                error:"Activate your account to get started"
+            })
         }
-        req.user = user 
-        req.token = token 
-        next()
+    }
+        
     } catch (err){
         console.log('token')
         res.status(401).json({
