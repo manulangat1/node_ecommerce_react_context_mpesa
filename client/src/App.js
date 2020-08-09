@@ -8,9 +8,11 @@ import { ProductView } from './components/Products/ProductView'
 //React route 
 import { HashRouter as Router,Route,Link,Switch} from 'react-router-dom'
 
+import { GlobalProvider } from './context/GlobalState'
+
 const App = () => {
   return (
-    
+     <GlobalProvider>
       <Router>
         <main>
       <Header />
@@ -24,6 +26,7 @@ const App = () => {
       <Footer />
       </main>
       </Router>
+      </GlobalProvider>
     
   );
 }
